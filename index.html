@@ -1,150 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Hustle Lab | 24-Hour Roadmaps</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Hustle Lab</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #fff; }
-.glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
-.btn-glow:hover { box-shadow: 0 0 20px rgba(59,130,246,0.5); transform: translateY(-1px); }
+body {
+    background: linear-gradient(180deg,#0b0f1a,#000);
+    color: white;
+}
+.glass {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+}
 </style>
 </head>
 
-<body class="min-h-screen bg-[radial-gradient(circle_at_50%_-20%,#1e293b,transparent_50%)]">
+<body class="flex flex-col items-center p-6">
 
-<nav class="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
-    <div class="text-xl font-extrabold tracking-tighter text-blue-500">AIHUSTLE<span class="text-white">LAB</span></div>
-    <div class="text-xs font-bold text-gray-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-        🔥 1,200+ GENERATED THIS WEEK
-    </div>
-</nav>
-
-<main class="max-w-3xl mx-auto px-6 pt-10 pb-20 text-center">
-
-<h1 class="text-4xl md:text-6xl font-extrabold mb-4">
-The <span class="text-blue-500">24-Hour</span> Revenue Engine
+<h1 class="text-4xl font-bold mb-2">
+AIHUSTLELAB
 </h1>
 
-<p class="text-gray-400 text-lg mb-10">
-Get 3 actionable AI roadmaps to your first ₹1,000. No fluff. Only execution.
+<p class="text-gray-400 mb-6">
+The 24-Hour Revenue Engine
 </p>
 
-<div class="glass p-2 rounded-xl flex flex-col md:flex-row gap-2 mb-12">
-    <input type="text" id="userInput" placeholder="Fitness, Coding, Anime..."
-        class="bg-transparent flex-1 px-4 py-3 outline-none">
-    <button onclick="startAnalysis()" class="btn-glow bg-blue-600 px-8 py-3 rounded-lg font-bold">
-        Generate Roadmap
-    </button>
+<div class="flex gap-2 w-full max-w-xl">
+<input id="userInput" placeholder="Fitness, Coding, Anime..."
+class="flex-1 p-3 rounded bg-white/10 text-white outline-none">
+
+<button onclick="startAnalysis()"
+class="bg-blue-600 px-6 py-3 rounded font-bold">
+Generate Roadmap
+</button>
 </div>
 
-<div id="loading" class="hidden py-10">
-    <div class="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-    <p class="text-blue-400 text-xs font-bold uppercase">Matching AI tools...</p>
+<div id="loading" class="hidden mt-6">
+Analyzing...
 </div>
 
-<div id="leadWall" class="hidden glass p-8 rounded-2xl max-w-md mx-auto">
-    <h2 class="text-xl font-bold mb-2">Roadmaps Ready 🚀</h2>
-    <p class="text-sm text-gray-400 mb-6">Enter email to unlock all 3 plans</p>
-    <input type="email" id="userEmail" placeholder="you@email.com"
-        class="w-full bg-white/5 px-4 py-3 rounded-lg mb-4">
-    <button onclick="saveAndShow()" class="w-full bg-white text-black py-3 rounded-lg font-bold">
-        Unlock My Plans
-    </button>
-</div>
-
-<div id="resultOutput" class="hidden space-y-8 text-left"></div>
-
-</main>
+<div id="resultOutput" class="hidden mt-10 w-full max-w-xl space-y-6"></div>
 
 <script>
-
 function startAnalysis(){
-    if(!userInput.value) return alert("Enter interest");
-    loading.classList.remove('hidden');
+    const niche = document.getElementById("userInput").value;
+
+    if(!niche){
+        alert("Enter interest");
+        return;
+    }
+
+    document.getElementById("loading").classList.remove("hidden");
+
     setTimeout(()=>{
-        loading.classList.add('hidden');
-        leadWall.classList.remove('hidden');
+        document.getElementById("loading").classList.add("hidden");
+
+        const output = document.getElementById("resultOutput");
+        output.classList.remove("hidden");
+
+        output.innerHTML = `
+        <h2 class="text-2xl font-bold text-blue-400">
+        💰 24-hour plan for "${niche}"
+        </h2>
+
+        <div class="glass p-6 rounded-2xl">
+            <h3 class="font-bold mb-2">1. Video Localization Agency</h3>
+            <p>Use HeyGen → translate videos → charge ₹2,000/video</p>
+            <p class="text-green-400 mt-2 font-semibold">
+            🔥 Works well in ${niche}
+            </p>
+
+            <a href="https://heygen.com" target="_blank"
+            class="block mt-4 bg-blue-600 py-3 text-center rounded-lg font-bold">
+            🚀 Start with HeyGen
+            </a>
+        </div>
+
+        <div class="glass p-6 rounded-2xl">
+            <h3 class="font-bold mb-2">2. AI Newsletter</h3>
+            <p>Use Beehiiv → curate niche content → monetize with ads</p>
+            <p class="text-green-400 mt-2 font-semibold">
+            🔥 Works well in ${niche}
+            </p>
+
+            <a href="https://beehiiv.com" target="_blank"
+            class="block mt-4 border border-blue-500 py-3 text-center rounded-lg font-bold">
+            🚀 Setup Beehiiv
+            </a>
+        </div>
+
+        <div class="glass p-6 rounded-2xl">
+            <h3 class="font-bold mb-2">3. AI Content Service</h3>
+            <p>Write blogs using AI → charge ₹1,000/article</p>
+            <p class="text-green-400 mt-2 font-semibold">
+            🔥 Works well in ${niche}
+            </p>
+
+            <a href="https://jasper.ai" target="_blank"
+            class="block mt-4 border border-white py-3 text-center rounded-lg font-bold">
+            🚀 Start with Jasper
+            </a>
+        </div>
+
+        <div class="mt-10 p-6 border border-dashed text-center">
+            <p class="text-gray-400 mb-4">
+            🔥 Want Top 10 High-Paying AI Niches + full playbook?
+            </p>
+
+            <input id="vipEmail" placeholder="Enter email"
+            class="bg-white/10 px-3 py-2 rounded mb-3 w-full text-center">
+
+            <button onclick="joinVIP()"
+            class="bg-blue-600 px-6 py-2 rounded font-bold">
+            Join VIP →
+            </button>
+        </div>
+        `;
     },1200);
 }
 
-async function saveAndShow(){
-    const email = userEmail.value;
-    const niche = userInput.value;
-    if(!email.includes('@')) return alert("Enter valid email");
-
-    // EMAIL SAVE
-    fetch('https://sheetdb.io/api/v1/YOUR_SHEETDB_ID',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({data:[{email,niche}]})
-    });
-
-    leadWall.classList.add('hidden');
-    resultOutput.classList.remove('hidden');
-
-    resultOutput.innerHTML = `
-    <h2 class="text-2xl font-bold text-blue-400 mb-6">Roadmaps for "${niche}"</h2>
-
-    <div class="glass p-6 rounded-2xl">
-        <h3 class="font-bold mb-4">1. Video Localization Agency</h3>
-        <p>Use HeyGen → translate videos → charge ₹2,000/video</p>
-        <a href="https://heygen.com" target="_blank" class="block mt-4 bg-blue-600 py-3 text-center rounded-lg font-bold">
-        🚀 Start with HeyGen
-        </a>
-    </div>
-
-    <div class="glass p-6 rounded-2xl">
-        <h3 class="font-bold mb-4">2. AI Newsletter</h3>
-        <p>Use Beehiiv → curate niche content → monetize with ads</p>
-        <a href="https://beehiiv.com" target="_blank" class="block mt-4 border border-blue-500 py-3 text-center rounded-lg font-bold">
-        🚀 Setup Beehiiv
-        </a>
-    </div>
-
-    <div class="glass p-6 rounded-2xl">
-        <h3 class="font-bold mb-4">3. AI Content Service</h3>
-        <p>Write blogs using AI → charge ₹1,000/article</p>
-        <a href="https://jasper.ai" target="_blank" class="block mt-4 border border-white py-3 text-center rounded-lg font-bold">
-        🚀 Start with Jasper
-        </a>
-    </div>
-
-    <!-- VIP BLOCK -->
-    <div class="mt-12 p-6 border border-dashed text-center">
-        <p class="text-gray-400 mb-4">
-        🔥 Want Top 10 High-Paying AI Niches + full playbook?
-        </p>
-
-        <input id="vipEmail" placeholder="Enter email"
-        class="bg-white/5 px-3 py-2 rounded mb-3 w-full max-w-xs text-center">
-
-        <br>
-
-        <button onclick="joinVIP()" class="bg-blue-600 px-6 py-2 rounded font-bold">
-        Join VIP →
-        </button>
-    </div>
-    `;
-}
-
 function joinVIP(){
-    const email = vipEmail.value;
-    if(!email.includes('@')) return alert("Enter valid email");
+    const email = document.getElementById("vipEmail").value;
 
-    fetch('https://sheetdb.io/api/v1/YOUR_SHEETDB_ID',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({data:[{email,tag:"VIP"}]})
-    });
+    if(!email){
+        alert("Enter email");
+        return;
+    }
 
-    alert("You're in 🚀");
+    alert("Saved! (connect SheetDB later)");
 }
-
 </script>
 
 </body>
