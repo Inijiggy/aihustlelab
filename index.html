@@ -1,186 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AI Hustle Lab</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-body {
-    font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, #0f172a, #020617);
-    color: white;
-}
-
-/* Glow background */
-.bg-glow {
-    position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(59,130,246,0.3), transparent);
-    filter: blur(120px);
-}
-
-/* Glass */
-.glass {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(12px);
-}
-
-/* Card hover */
-.card {
-    transition: all 0.3s ease;
-}
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(59,130,246,0.2);
-}
-
-/* Button */
-.glow-btn {
-    background: linear-gradient(135deg,#3b82f6,#2563eb);
-    box-shadow: 0 10px 25px rgba(59,130,246,0.4);
-}
-.glow-btn:hover {
-    transform: scale(1.05);
-}
-
-/* Fade animation */
-.fade-in {
-    animation: fadeIn 0.6s ease forwards;
-}
-@keyframes fadeIn {
-    from {opacity:0; transform:translateY(10px);}
-    to {opacity:1; transform:translateY(0);}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hustle Lab | Premium Revenue Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #3b82f6; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #020617; 
+            color: #fff;
+            background-image: radial-gradient(circle at 50% -20%, #1e293b, transparent);
+        }
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+        .bento-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.4);
+        }
+        .glow-text { text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        @keyframes scan {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .scanner {
+            position: absolute; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: scan 2s linear infinite;
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col items-center px-6 py-12">
 
-<body class="flex flex-col items-center px-6 py-10">
-
-<div class="bg-glow"></div>
-
-<!-- HERO -->
-<div class="text-center max-w-2xl mb-12 fade-in">
-    <h1 class="text-5xl font-extrabold tracking-tight">
-        AIHUSTLELAB
-    </h1>
-
-    <p class="text-gray-400 mt-4 text-lg">
-        Build your first ₹1,000 with AI in 24 hours.
-    </p>
-</div>
-
-<!-- INPUT -->
-<div class="flex gap-3 w-full max-w-2xl mb-8 fade-in">
-    <input id="userInput"
-    placeholder="Fitness, Coding, Anime..."
-    class="flex-1 p-4 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-    <button onclick="startAnalysis()"
-    class="glow-btn px-6 py-4 rounded-xl font-semibold">
-    Generate
-    </button>
-</div>
-
-<div id="loading" class="hidden text-gray-400 mb-6">
-    Generating roadmap...
-</div>
-
-<!-- RESULTS -->
-<div id="resultOutput" class="hidden w-full max-w-2xl space-y-6"></div>
-
-<script>
-function startAnalysis(){
-    const niche = document.getElementById("userInput").value;
-
-    if(!niche){
-        alert("Enter interest");
-        return;
-    }
-
-    document.getElementById("loading").classList.remove("hidden");
-
-    setTimeout(()=>{
-        document.getElementById("loading").classList.add("hidden");
-
-        const output = document.getElementById("resultOutput");
-        output.classList.remove("hidden");
-
-        output.innerHTML = `
-        <h2 class="text-2xl font-bold text-blue-400 fade-in">
-        💰 How to make ₹1,000 with "${niche}" in 24 hours
-        </h2>
-
-        ${cardHTML("Video Localization Agency",
-        "Use HeyGen → translate videos → charge ₹2,000/video",
-        "https://heygen.com")}
-
-        ${cardHTML("AI Newsletter",
-        "Use Beehiiv → curate content → monetize with ads",
-        "https://beehiiv.com")}
-
-        ${cardHTML("AI Content Service",
-        "Write blogs using AI → charge ₹1,000/article",
-        "https://jasper.ai")}
-
-        <div class="glass p-8 rounded-2xl text-center mt-8 fade-in">
-            <p class="text-gray-300 mb-4 text-lg">
-            🔥 Get 10 High-Paying AI Niches + full playbook
-            </p>
-
-            <input id="vipEmail"
-            placeholder="Enter your email"
-            class="bg-white/5 border border-white/10 px-4 py-3 rounded-lg w-full mb-4 text-center">
-
-            <button onclick="joinVIP()"
-            class="glow-btn px-6 py-3 rounded-lg font-semibold w-full">
-            Join VIP →
-            </button>
+    <div class="text-center max-w-3xl mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-bold text-blue-400 uppercase tracking-widest mb-4">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            Algorithm v2.4 Live
         </div>
-        `;
-    },1000);
-}
+        <h1 class="text-6xl font-extrabold tracking-tighter glow-text">
+            AIHUSTLE<span class="text-blue-500">LAB</span>
+        </h1>
+        <p class="text-gray-400 text-xl font-medium">Build your first ₹1,000 revenue stream in 24 hours.</p>
+    </div>
 
-function cardHTML(title, desc, link){
-    return `
-    <div class="glass card p-6 rounded-2xl fade-in">
-        <h3 class="text-lg font-semibold mb-2">${title}</h3>
-
-        <p class="text-gray-300">${desc}</p>
-
-        <p class="text-green-400 mt-2 text-sm">
-        🔥 Works well
-        </p>
-
-        <button onclick="window.open('${link}','_blank')"
-        class="glow-btn mt-5 w-full py-3 rounded-lg font-semibold">
-        🚀 Start
+    <div class="relative w-full max-w-2xl mb-12 glass p-2 rounded-2xl flex items-center gap-2 border-white/10 group focus-within:border-blue-500/50 transition-all">
+        <input id="userInput" placeholder="What is your interest? (e.g. Fitness, Coding)" 
+               class="flex-1 bg-transparent px-6 py-4 outline-none text-lg">
+        <button onclick="startAnalysis()" 
+                class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
+            Analyze
         </button>
     </div>
-    `;
-}
 
-function joinVIP(){
-    const email = document.getElementById("vipEmail").value;
+    <div id="loading" class="hidden w-full max-w-lg mb-12 glass p-6 rounded-2xl relative overflow-hidden">
+        <div class="scanner"></div>
+        <div class="flex flex-col items-center gap-3">
+            <div class="animate-spin h-6 w-6 border-2 border-blue-500 border-t-transparent rounded-full"></div>
+            <p class="text-blue-400 font-bold text-xs uppercase tracking-widest">Optimizing Revenue Paths...</p>
+        </div>
+    </div>
 
-    if(!email){
-        alert("Enter email");
-        return;
-    }
+    <div id="resultOutput" class="hidden w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6"></div>
 
-    alert("Saved (connect SheetDB next)");
-}
-</script>
+    <script>
+        function startAnalysis(){
+            const niche = document.getElementById("userInput").value;
+            if(!niche) return alert("Please specify an interest first.");
 
+            document.getElementById("loading").classList.remove("hidden");
+            document.getElementById("resultOutput").classList.add("hidden");
+
+            setTimeout(()=>{
+                document.getElementById("loading").classList.add("hidden");
+                const output = document.getElementById("resultOutput");
+                output.classList.remove("hidden");
+
+                output.innerHTML = `
+                    <div class="md:col-span-3 mb-4 text-center">
+                        <h2 class="text-3xl font-bold">Generated Roadmaps for <span class="text-blue-500">"${niche}"</span></h2>
+                    </div>
+                    ${cardHTML("Video Localization", "Use HeyGen to localize content into 5 languages. Charge influencers ₹2k/video.", "heygen.com", "High Demand")}
+                    ${cardHTML("AI Content Hub", "Curate news via Perplexity & Beehiiv. Monetize niche subscribers with ads.", "beehiiv.com", "Passive Potential")}
+                    ${cardHTML("SaaS Writing", "Deploy Jasper for high-ticket blog packages. Charge businesses ₹1.5k/post.", "jasper.ai", "Fast Cash")}
+                    
+                    <div class="md:col-span-3 glass p-10 rounded-3xl mt-12 text-center border-t-4 border-blue-500">
+                        <h3 class="text-3xl font-bold mb-4">Unlock the VIP Playbook</h3>
+                        <p class="text-gray-400 mb-8 max-w-lg mx-auto">Get our private database of 50+ AI niches and exact prompt templates.</p>
+                        <div class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
+                            <input id="vipEmail" placeholder="Enter your best email" class="flex-1 bg-white/5 border border-white/10 px-6 py-4 rounded-xl outline-none focus:border-blue-500">
+                            <button onclick="joinVIP()" class="bg-white text-black px-8 py-4 rounded-xl font-extrabold hover:bg-gray-200 transition-all">Join VIP</button>
+                        </div>
+                    </div>
+                `;
+            }, 1800);
+        }
+
+        function cardHTML(title, desc, link, badge){
+            return `
+            <div class="glass bento-card p-8 rounded-3xl flex flex-col justify-between h-full">
+                <div>
+                    <span class="text-[10px] font-extrabold text-blue-400 uppercase tracking-widest bg-blue-500/10 px-2 py-1 rounded mb-6 inline-block">${badge}</span>
+                    <h3 class="text-2xl font-bold mb-3">${title}</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">${desc}</p>
+                </div>
+                <button onclick="window.open('https://${link}','_blank')" class="mt-8 w-full bg-white/5 hover:bg-white/10 py-4 rounded-xl font-bold border border-white/10 transition-all">
+                    View Tool →
+                </button>
+            </div>
+            `;
+        }
+    </script>
 </body>
 </html>
